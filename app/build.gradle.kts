@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt") // Add kapt for Room
+    id("kotlinx-serialization") // Add serialization
 }
 
 android {
@@ -49,19 +51,32 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     // Room Database
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
-    // Retrofit for API calls
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
+    // Choose ONE approach - Either Retrofit or Ktor
+    
+    // Option 1: Retrofit for API calls
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    
+    // Option 2: Ktor for API calls (if you prefer this instead)
+    // implementation("io.ktor:ktor-client-android:2.3.7")
+    // implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+    // implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
+    // implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    
+    // Image loading
+    implementation("io.coil-kt:coil:2.5.0")
 
     // Coroutines for async tasks
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    // RecyclerView for displaying lists
-    implementation(libs.androidx.recyclerview)
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
