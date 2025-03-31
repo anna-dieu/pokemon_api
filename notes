@@ -1,0 +1,4 @@
+Your app must use Navigation and have at least one menu (top bar, bottom bar, rail, etc)
+Your app must use a Room database persisting data between sessions
+Your app must consume an API: Your app must consume an API and make at least one http get request using Ktor
+Your app must display some sort of data from the API
