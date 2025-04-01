@@ -9,7 +9,13 @@ data class PokemonTypeEntry(
     val slot: Int
 )
 
-data class NamedApiResource(
+data class TypeDetailResponse(
+    val id: Int,
     val name: String,
-    val url: String
+    val pokemon: List<PokemonWrapper>
+)
+
+data class PokemonWrapper(
+    val pokemon: NamedApiResource,
+    val slot: Int
 )

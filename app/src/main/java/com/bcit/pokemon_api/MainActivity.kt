@@ -13,25 +13,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Find the NavHostFragment directly for more reliable initialization
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        
+        // Fix: Use NavHostFragment to get the controller correctly
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
         
-        // Set up BottomNavigationView with NavController
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setupWithNavController(navController)
-        
-        // Add AppBarConfiguration for proper Up button behavior
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+            setOf(
+                R.id.navigation_home, 
+                R.id.navigation_dashboard, 
+                R.id.navigation_history
+            )
         )
+        
         setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
-
+    
     override fun onSupportNavigateUp(): Boolean {
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

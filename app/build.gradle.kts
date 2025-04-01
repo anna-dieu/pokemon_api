@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt") // Add kapt for Room
     id("kotlinx-serialization") // Add serialization
+    // Add this line for Safe Args:
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -49,6 +51,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    // Navigation components
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     // Room Database
     implementation("androidx.room:room-runtime:2.6.1")

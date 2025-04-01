@@ -15,11 +15,40 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.bcit.pokemon_api.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_type_detail"
+            app:destination="@id/type_detail_fragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_history"
         android:name="com.bcit.pokemon_api.ui.history.HistoryFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_history"
         tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/type_detail_fragment"
+        android:name="com.bcit.pokemon_api.ui.dashboard.TypeDetailFragment"
+        android:label="Type Detail"
+        tools:layout="@layout/fragment_type_detail">
+        <argument
+            android:name="typeName"
+            app:argType="string"
+            android:defaultValue="normal" />
+        <action
+            android:id="@+id/action_type_detail_to_pokemon_detail"
+            app:destination="@id/pokemon_detail_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pokemon_detail_fragment"
+        android:name="com.bcit.pokemon_api.ui.detail.PokemonDetailFragment"
+        android:label="Pokemon Detail"
+        tools:layout="@layout/fragment_pokemon_detail">
+        <argument
+            android:name="pokemonId"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
 </navigation>

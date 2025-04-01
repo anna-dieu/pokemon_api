@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bcit.pokemon_api.R
 import com.bcit.pokemon_api.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
-
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private lateinit var dashboardViewModel: DashboardViewModel
@@ -34,7 +35,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupRecyclerView() {
         typeAdapter = PokemonTypeAdapter(emptyList()) { typeName ->
-            dashboardViewModel.loadPokemonByType(typeName)
+            navigateToTypeDetail(typeName)
         }
         
         binding.recyclerViewTypes.apply {
@@ -43,10 +44,18 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    private fun navigateToTypeDetail(typeName: String) {
+        // Use a simpler navigation approach with a Bundle
+        val bundle = Bundle().apply {
+            putString("typeName", typeName)
+        }
+        findNavController().navigate(R.id.action_navigation_dashboard_to_type_detail, bundle)
+    }
+    
     private fun observeViewModel() {
         dashboardViewModel.pokemonTypes.observe(viewLifecycleOwner) { types ->
             typeAdapter = PokemonTypeAdapter(types) { typeName ->
-                dashboardViewModel.loadPokemonByType(typeName)
+                navigateToTypeDetail(typeName)
             }
             binding.recyclerViewTypes.adapter = typeAdapter
         }
