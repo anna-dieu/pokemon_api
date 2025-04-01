@@ -24,13 +24,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Set title to "Random Pokemon" instead of "Pokemon of the Day"
+        // Set title to "Random Pokemon"
         binding.titlePokemonOfDay.text = "Random Pokemon"
-        
+
         // Add padding to ensure text isn't cut off
         binding.titlePokemonOfDay.setPadding(16, 16, 16, 16)
-        
-        // Adjust text size if needed
+
+        // Adjust text size for better readability
         binding.pokemonName.textSize = 20f
 
         binding.loadRandomButton.setOnClickListener {
@@ -44,11 +44,11 @@ class HomeFragment : Fragment() {
                 binding.pokemonWeight.text = "Weight: ${pokemon.weight / 10.0}kg"
                 binding.pokemonHeight.text = "Height: ${pokemon.height / 10.0}m"
                 binding.pokemonTypes.text = "Type: ${pokemon.types}"
-                
+
                 binding.pokemonImage.load(pokemon.imageUrl) {
                     crossfade(true)
                 }
-                
+
                 binding.contentGroup.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
                 binding.errorText.visibility = View.GONE
